@@ -82,7 +82,7 @@ How To Deploy
   ```
   $ npx cdk deploy FrontendStack
 
-  FrontendStack.FrontendStackAppURL53065248 = https://abcdefghijklm.cloudfront.net/
+  FrontendStack.FrontendStackCloudFrontURL53065248 = https://abcdefghijklm.cloudfront.net/
   ```
 
 - Deploy Amazon Cognito and Amazon API Gateway
@@ -212,6 +212,7 @@ How To Deploy
 
             // redirect to logout page.
           window.location.replace(logoutUrl);
+  120   };
   ```
 
 - Build again the sample web application
@@ -229,13 +230,13 @@ How To Deploy
 - Deploy again with AWS CDK.
   ```
   $ cd ../cdk
-  $ cdk deploy FrontendStack
+  $ npx cdk deploy FrontendStack
 
   Outputs:
-  FrontendStack.FrontendStackAppURL53065248 = https://abcdefghijklm.cloudfront.net/
+  FrontendStack.FrontendStackCloudFrontURL53065248 = https://abcdefghijklm.cloudfront.net/
   ```
   ```
-  $ cdk deploy CognitoWithXStack
+  $ npx cdk deploy CognitoWithXStack
 
   Outputs:
   CognitoWithXStack.CacheStackmemcachedEndpointAddressB93EAFBF = cog-ca-abcdefghijklm.nopqrs.cfg.usw2.cache.amazonaws.com
@@ -248,7 +249,7 @@ How To Deploy
   CognitoWithXStack.CognitoStackUserPoolId3E384F9B = us-west-2_abcdefghi
   ```
 
-- You can see the URL of Demo Application. Access to the `FrontendStack.FrontendStackAppURL` in output of CDK.
+- You can see the URL of Demo Application. Access to the `FrontendStack.FrontendStackCloudFrontURL` in output of CDK.
 
 - Activate the X login link function for Cognito's userPool by manual operation
   - Open the AWS Management Console and open the Cognito screen 
