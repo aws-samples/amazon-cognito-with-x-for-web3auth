@@ -1,0 +1,8 @@
+.env
+w3a-cognito-demo/node_modules
+cdk/lambda/private_key_2048.pem
+cdk/lambda/jwk.out
+cdk/cdk.context.json
+w3a-cognito-demo*
+package-lock.json
+cdk/.DS_Store
