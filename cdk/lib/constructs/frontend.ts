@@ -116,7 +116,7 @@ export class Frontend extends Construct {
 
     // eslint-disable-next-line no-new
     new s3_deployment.BucketDeployment(this, 'FrontendAppDeploy', {
-      sources: [s3_deployment.Source.asset('../w3a-cognito-demo/build')],
+      sources: [s3_deployment.Source.asset('../w3a-cognito-demo/dist')],
       destinationBucket: frontendWebAppBucket,
       distribution: frontendCloudfront,
       distributionPaths: ['/*'],

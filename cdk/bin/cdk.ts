@@ -8,7 +8,7 @@ import { FrontendStack } from '../lib/Frontend'
 import { WafStack } from '../lib/WAFStack'
 import { RemoteOutputStack } from '../lib/RemoteOutputStack'
 
-import { AwsPrototypingChecks } from '@aws-prototyping-sdk/pdk-nag'
+import { AwsPrototypingChecks } from '@aws/pdk/pdk-nag'
 // import { CdkGraph } from '@aws-prototyping-sdk/cdk-graph'
 // import { CdkGraphDiagramPlugin } from '@aws-prototyping-sdk/cdk-graph-plugin-diagram'
 

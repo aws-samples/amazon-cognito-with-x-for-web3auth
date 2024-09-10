@@ -167,7 +167,7 @@ async function getUserInfo (token: any): Promise<userInfo> {
   const accessToken = await getAccessToken(token)
   const user = JSON.parse(accessToken.user)
   return {
-    sub: user.id,
+    sub: user.id_str,
     name: user.name,
     email: user.email,
     email_verified: true

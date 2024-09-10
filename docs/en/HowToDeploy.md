@@ -38,7 +38,7 @@ How To Deploy
 
 - Download the sample web application. It can integrate with Web3Auth and Amazon Cognito.
   ```
-  $ npx degit Web3Auth/web3auth-pnp-examples/web-no-modal-sdk/custom-authentication/cognito-react-no-modal-example w3a-cognito-demo 
+  $ npx degit Web3Auth/web3auth-pnp-examples/web-no-modal-sdk/custom-authentication/single-verifier-examples/cognito-react-no-modal-example w3a-cognito-demo 
   $ cd w3a-cognito-demo
   $ npm install
   ```
@@ -135,12 +135,12 @@ How To Deploy
   - Enter Verifier Identifier: {name of identifier}
   - Login Provider: Custom
   - JWT Verifier ID: Email
-  - JWK Endpoint: https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json
+  - JWK Endpoint: https://cognito-idp.{region}.amazonaws.com/{CognitoStackUserPoolId}/.well-known/jwks.json
   - Select JWT Validation:
     - Field: iss
-      Value: https://cognito-idp.{region}.amazonaws.com/{userPoolId}`
+      Value: https://cognito-idp.{region}.amazonaws.com/{CognitoStackUserPoolId}`
     - Field: aud
-      Value: {cognito clinet id}
+      Value: {CognitoStackUserPoolClientId}
 
 ![](../images/Web3AuthDashboard_4.png)
 ![](../images/Web3AuthDashboard_4-2.png)
@@ -168,13 +168,22 @@ How To Deploy
   48           adapterSettings: {
   49             loginConfig: {
   50               jwt: {
-  51                 verifier: <Web3Auth_Verifier_Name>,
+  51                 verifier: <Web3Auth_Verifier_Identifier>,
   52                 typeOfLogin: "jwt",
-  53                 clientId: <Cognito_Client_ID>
+  53                 clientId: <CognitoStackUserPoolClientId>
   54               },
   55             },
   56           },
   57         });
+  ```
+  ```
+  $ vi w3a-cognito-demo/src/App.tsx
+
+  36        const web3auth = new Web3AuthNoModal({
+  37        clientId,
+  38        web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET, // Chage SAPPHIRE_MAINNET to SAPPHIRE_DEVNET
+  38        privateKeyProvider,
+  39      });
   ```
   ```
   $ vi w3a-cognito-demo/src/App.tsx
@@ -184,7 +193,7 @@ How To Deploy
   81       {
   82         loginProvider: "jwt",
   83         extraLoginOptions: {
-  84           domain: <Cognito Userpool Domain>,
+  84           domain: <CognitoStackUserPoolDomainEndpoint>,
   85           verifierIdField: "email",
   86           response_type: "token",
   87           scope: "email profile openid",
@@ -206,8 +215,8 @@ How To Deploy
   119     setProvider(null);
 
           // Add to logout url
-          const logoutUrl: string = `<Cognito Userpool Domain>/logout` + 
-            `?client_id=<Cognito WebApplication Client ID}` + 
+          const logoutUrl: string = `<CognitoStackUserPoolDomainEndpoint>/logout` + 
+            `?client_id={CognitoStackUserPoolClientId}` + 
             `&logout_uri=${encodeURIComponent(window.location.origin)}/`  // The trailing '/' is important. Please be aware that its absence can result in an error.
 
             // redirect to logout page.
@@ -226,6 +235,7 @@ How To Deploy
   export X_CONSUMER_KEY=
   export X_CONSUMER_KEY_SECRET=
   ```
+  ![](../images/X_CONSUMER_KEYS.png)
 
 - Deploy again with AWS CDK.
   ```
